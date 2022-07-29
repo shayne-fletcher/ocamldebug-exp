@@ -2,7 +2,7 @@
 // (see the discussion here
 // https://codereview.stackexchange.com/questions/219567/communication-with-interactive-program-using-childprocess).
 
-import { exec, ChildProcess } from 'child_process';
+import { spawn, ChildProcess } from 'child_process';
 import { write } from 'fs';
 import { EventEmitter } from 'events';
 
@@ -111,7 +111,8 @@ export class Ocd extends EventEmitter {
         console.log("ocd starting");
         this._running = false;
         this._initialized = false;
-        this._process = exec(this._ocdPath + " " + "-no-version" + " " + "/Users/shaynefletcher/tmp/uncaught/uncaught");
+        this._process = spawn(this._ocdPath, ["-no-version", "/Users/shaynefletcher/tmp/uncaught/uncaught"], {stdio: 'pipe'});
+        //this._process = exec(this._ocdPath + " " + "-no-version" + " " + "/Users/shaynefletcher/tmp/uncaught/uncaught");
         this._process.on("error", this.onError);
         this._process.on("exit", this.onExit)
         this._process.stdout?.on("data", this.onData);
