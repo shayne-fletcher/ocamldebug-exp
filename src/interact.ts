@@ -85,8 +85,8 @@ interface Events {
 
 export const Debugger_events : Events = {
     console_data: 'console:data',
-    console_error: 'console.error',
-    console_write: 'console.write',
+    console_error: 'console:error',
+    console_write: 'console:write',
 
     ocd_change_directory: 'ocd:change_directory',
     ocd_stop: 'ocd:stop',
